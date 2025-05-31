@@ -11,7 +11,7 @@ import :application;
 
 namespace na {
 export VoidResult runGlfwApplication(const GlfwApplicationConfig &config,
-                                     GlfwApplication &app) {
+                                     GlfwApplication &app) noexcept {
   if (!glfwInit()) {
     return SimpleError("Failed to initialize GLFW");
   }

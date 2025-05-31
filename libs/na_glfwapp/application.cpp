@@ -20,7 +20,9 @@ export struct GlfwApplicationState {
 
 export class GlfwApplication {
 public:
-  virtual ~GlfwApplication() = default;
-  virtual VoidResult onUpdate(const GlfwApplicationState &) { return {}; }
+  virtual ~GlfwApplication() noexcept = default;
+  virtual VoidResult onUpdate(const GlfwApplicationState &) noexcept {
+    return {};
+  }
 };
 }; // namespace na
