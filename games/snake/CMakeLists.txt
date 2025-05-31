@@ -6,6 +6,7 @@ target_compile_options(na_glfwapp PUBLIC -fno-rtti -fno-exceptions -Wall -Wextra
 target_link_libraries(snake PUBLIC
     na_error
     na_gl
+    na_gl_render_common
     na_glad
     na_glfwapp
 )

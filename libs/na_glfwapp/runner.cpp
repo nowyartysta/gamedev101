@@ -30,18 +30,31 @@ export VoidResult runGlfwApplication(const GlfwApplicationConfig &config,
   glfwMakeContextCurrent(window);
   gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
 
+  bool initialized = false;
+  VoidResult result{};
+
   while (!glfwWindowShouldClose(window)) {
     GlfwApplicationState state{
         .width = config.width,
         .height = config.height,
     };
-    CHECK_RESULT(app.onUpdate(state));
+    if (!initialized) {
+      result = app.onInit(state);
+      if (!result.ok()) {
+        break;
+      }
+      initialized = true;
+    }
+    result = app.onUpdate(state);
+    if (!result.ok()) {
+      break;
+    }
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
 
   glfwDestroyWindow(window);
   glfwTerminate();
-  return {};
+  return result;
 }
 }; // namespace na

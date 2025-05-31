@@ -21,6 +21,9 @@ export struct GlfwApplicationState {
 export class GlfwApplication {
 public:
   virtual ~GlfwApplication() noexcept = default;
+  virtual VoidResult onInit(const GlfwApplicationState &) noexcept {
+    return {};
+  }
   virtual VoidResult onUpdate(const GlfwApplicationState &) noexcept {
     return {};
   }
